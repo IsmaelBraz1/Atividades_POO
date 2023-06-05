@@ -1,6 +1,7 @@
 package Laboratorio2;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -15,10 +16,12 @@ public class Principal extends JFrame {
 	protected JButton bCad;
 	protected JButton bList;
 	protected JButton bAtl;
-	protected JButton bDEl;
+	protected JButton bDel;
 	protected JPanel menu;
 	protected JPanel cadastro;
 	protected JPanel listar;
+	protected JPanel atualizar;
+	protected JPanel deletar;
 	protected ArrayList<JPanel> paineis;
 	protected JPanel painelGeral;
 	public Principal() {
@@ -28,27 +31,39 @@ public class Principal extends JFrame {
 		this.setLayout(new BorderLayout(2, 1));
 		
 		menu = new JPanel();
-		cadastro = new Cadastrar();
-		listar = new Listar();
+		menu.setBackground(Color.gray);
 		painelGeral = new JPanel();
 		painelGeral.setLayout(new GridBagLayout());
+		
+		cadastro = new Cadastrar();
+		listar = new Listar();
+		atualizar = new Atualizar();
+		deletar = new Deletar();
+		
 		painelGeral.add(cadastro);
 		painelGeral.add(listar);
+		painelGeral.add(atualizar);
+		painelGeral.add(deletar);
+		
 		paineis = new ArrayList<JPanel>();
 		paineis.add(0, cadastro);
 		paineis.add(1, listar);
+		paineis.add(2, atualizar);
+		paineis.add(3, deletar);
 		
 		bCad = new JButton("Cadastrar");
 		bCad.addActionListener(new showPaineis(0));
 		bList = new JButton("Listar");
 		bList.addActionListener(new showPaineis(1));
 		bAtl = new JButton("Atualizar");
-		bDEl = new JButton("Deletar");
+		bAtl.addActionListener(new showPaineis(2));
+		bDel = new JButton("Deletar");
+		bDel.addActionListener(new showPaineis(3));
 		
 		menu.add(bCad);
 		menu.add(bList);
 		menu.add(bAtl);
-		menu.add(bDEl);
+		menu.add(bDel);
 
 		this.add(menu, BorderLayout.NORTH);
 		this.add(painelGeral, BorderLayout.CENTER);
