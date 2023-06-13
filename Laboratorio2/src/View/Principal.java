@@ -1,4 +1,4 @@
-package Laboratorio2;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Controller.ListaClientes;
+
 public class Principal extends JFrame {
 	protected JButton bCad;
 	protected JButton bList;
@@ -24,7 +26,9 @@ public class Principal extends JFrame {
 	protected JPanel deletar;
 	protected ArrayList<JPanel> paineis;
 	protected JPanel painelGeral;
-	public Principal() {
+	protected ListaClientes lista;
+	public Principal(ListaClientes lista) {
+		this.lista = lista;
 		this.setSize(500, 500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,9 +37,9 @@ public class Principal extends JFrame {
 		menu = new JPanel();
 		menu.setBackground(Color.gray);
 		painelGeral = new JPanel();
-		painelGeral.setLayout(new GridBagLayout());
+		//painelGeral.setLayout(new GridBagLayout());
 		
-		cadastro = new Cadastrar();
+		cadastro = new Cadastrar(lista);
 		listar = new Listar();
 		atualizar = new Atualizar();
 		deletar = new Deletar();

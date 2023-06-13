@@ -1,4 +1,4 @@
-package Laboratorio2;
+package View;
 
 import java.awt.GridLayout;
 
