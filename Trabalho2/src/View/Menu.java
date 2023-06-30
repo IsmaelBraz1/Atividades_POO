@@ -1,0 +1,95 @@
+package View;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import View.eventos.*;
+import Controller.*;
+
+public class Menu extends JPanel {
+	public int alu, bug, pts;
+	public JButton robo1;
+	public JButton robo2;
+	public JButton robo3;
+	public JButton verificar;
+	public JButton proxRodada;
+	public JButton sair;
+	public JLabel pontos;
+	public JLabel rob1pts;
+	public JLabel rob2pts;
+	public JLabel rob3pts;
+	public JLabel nbug;
+	public JLabel nalu;
+	public Rodadas rodada;
+	public Tabuleiro tabu;
+
+	public Menu(Rodadas rodada, Tabuleiro tabuleiro, JFrame janela) {
+		this.rodada = rodada;
+		this.tabu = tabuleiro;
+		this.setLayout(new GridLayout(3, 1));
+		ImageIcon iconAlu = new ImageIcon("img/aluno.png");
+		ImageIcon iconBug = new ImageIcon("img/bug.png");
+		ImageIcon iconBb8 = new ImageIcon("img/bb8.png");
+		ImageIcon iconC3po = new ImageIcon("img/C3po.png");
+		ImageIcon iconR2d2 = new ImageIcon("img/r2d2.png");
+		ImageIcon icon = new ImageIcon("img/rei.png");
+		
+		JPanel info = new JPanel();
+		info.setLayout(new GridLayout(3, 1));
+		JPanel barraPts = new JPanel();
+		barraPts.add(new JLabel("Pontuação: "));
+		pontos = new JLabel("0");
+		barraPts.add(pontos);
+		JPanel AlunoBug = new JPanel();
+		nalu = new JLabel("0");
+		nbug = new JLabel("0");
+		AlunoBug.add(new JLabel("Total: "));
+		AlunoBug.add(new JLabel(iconAlu));
+		AlunoBug.add(nalu);
+		AlunoBug.add(new JLabel(iconBug));
+		AlunoBug.add(nbug);
+		JPanel barraRobos = new JPanel();
+		rob1pts = new JLabel("0");
+		rob2pts = new JLabel("0");
+		rob3pts = new JLabel("0");
+		barraRobos.add(new JLabel(iconBb8));
+		barraRobos.add(rob1pts);
+		barraRobos.add(new JLabel(iconC3po));
+		barraRobos.add(rob2pts);
+		barraRobos.add(new JLabel(iconR2d2));
+		barraRobos.add(rob3pts);
+		info.add(barraPts);
+		info.add(AlunoBug);
+		info.add(barraRobos);
+		JPanel robos = new JPanel();
+		robo1 = new JButton(iconBb8);
+		robo1.addActionListener(new acionarRobo(robo1, 0,tabu,rodada));
+		robo2 = new JButton(iconC3po);
+		robo2.addActionListener(new acionarRobo(robo2, 1,tabu,rodada));
+		robo3 = new JButton(iconR2d2);
+		robo3.addActionListener(new acionarRobo(robo3, 2,tabu,rodada));
+		robos.add(robo1);
+		robos.add(robo2);
+		robos.add(robo3);
+		JPanel botoes = new JPanel();
+		botoes.setLayout(new GridLayout(3, 1));
+		verificar = new JButton("Verificar");
+		verificar.addActionListener(new Verificar(pontos, rob1pts, rob2pts, rob3pts,nbug,nalu,rodada));
+		proxRodada = new JButton("Proxima rodada");
+		proxRodada.addActionListener(new ProximaRodada(robo1, robo2, robo3, rodada));
+		sair = new JButton("Sair");
+		sair.addActionListener(new Sair(janela,rodada));
+		botoes.add(verificar);
+		botoes.add(proxRodada);
+		botoes.add(sair);
+		this.add(info, BorderLayout.NORTH);
+		this.add(robos, BorderLayout.CENTER);
+		this.add(botoes, BorderLayout.SOUTH);
+		this.setVisible(true);
+	}
+}
